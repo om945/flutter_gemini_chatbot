@@ -176,7 +176,7 @@ class _ChatState extends State<Chat> {
               : Colors.black,
         ),
         inputOptions: InputOptions(
-          inputToolbarPadding: EdgeInsets.fromLTRB(10, 8, 10, 10),
+          inputToolbarPadding: EdgeInsets.fromLTRB(8, 8, 8, 10),
           // trailing: [
           //   IconButton(onPressed: _sendMediaMessage, icon: Icon(Icons.image))
           // ],
