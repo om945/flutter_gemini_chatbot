@@ -146,7 +146,7 @@ class _ChatState extends State<Chat> {
         messageOptions: MessageOptions(
           messageTextBuilder: (ChatMessage message,
               ChatMessage? previousMessage, ChatMessage? nextMessage) {
-            return Text.rich(
+            return SelectableText.rich(
               TextSpan(
                 children: _parseText(message.text),
               ),
