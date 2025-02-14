@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gemini_chatbot/pages/aboutpage.dart';
 import 'package:flutter_gemini_chatbot/theam/theam.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -24,6 +25,7 @@ class MyDrawer extends StatelessWidget {
             title: Text('Settings'),
             leading: Icon(Icons.settings),
             onTap: () {
+              Navigator.pop(context);
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => Setting()),
@@ -36,6 +38,10 @@ class MyDrawer extends StatelessWidget {
               softWrap: true,
             ),
             leading: Icon(Icons.info),
+            onTap: (){
+              Navigator.pop(context);
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => AboutPage()));
+            },
           ),
         ],
       ),

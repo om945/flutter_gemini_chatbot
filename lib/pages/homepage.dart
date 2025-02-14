@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
-import 'dart:typed_data';
 import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gemini_chatbot/pages/drawer.dart';
@@ -56,10 +54,9 @@ class _ChatState extends State<Chat> {
   //         );
   //       });
   // }
-
   ChatUser user = ChatUser(id: '1', firstName: 'Me');
   ChatUser bot =
-      ChatUser(id: '2', firstName: '', profileImage: 'assets/files/bot.png');
+      ChatUser(id: '2', firstName: 'A U Z A', profileImage: 'assets/files/icon.png');
 
   List<ChatMessage> allMessages = [];
   List<ChatUser> typing = [];
@@ -91,16 +88,11 @@ class _ChatState extends State<Chat> {
       body: jsonEncode(data),
     )
         .then((value) {
-      List<Uint8List>? images;
-      if (m.medias?.isNotEmpty ?? false) {
-        images = [File(m.medias!.first.url).readAsBytesSync()];
-      }
-
       if (value.statusCode == 200) {
         var result = jsonDecode(value.body);
-        print(result['candidates'][0]['content']['parts'][0]['text']);
+        String responseText = result['candidates'][0]['content']['parts'][0]['text'];
         ChatMessage m1 = ChatMessage(
-          text: result['candidates'][0]['content']['parts'][0]['text'],
+          text: responseText,
           user: bot,
           createdAt: DateTime.now(),
           isMarkdown: true,
@@ -118,18 +110,18 @@ class _ChatState extends State<Chat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MyDrawer(
-          // name: _name,
-          ),
+      drawer: MyDrawer(),
       appBar: AppBar(
+        centerTitle: true,
         forceMaterialTransparency: true,
-        title: Text('Gemini Chatbot'),
+        title: Text('A U Z A',
+            style: TextStyle(
+          fontWeight: FontWeight.bold
+        )),
       ),
       body: DashChat(
         currentUser: user,
-        onSend: (
-          ChatMessage m,
-        ) {
+        onSend: (ChatMessage m) {
           getdata(m);
         },
         messages: allMessages,
@@ -154,10 +146,14 @@ class _ChatState extends State<Chat> {
         messageOptions: MessageOptions(
           messageTextBuilder: (ChatMessage message,
               ChatMessage? previousMessage, ChatMessage? nextMessage) {
-            return SelectableText(message.text,
-                style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.width < 100 ? 16 : 16,
-                ));
+            return Text.rich(
+              TextSpan(
+                children: _parseText(message.text),
+              ),
+              style: TextStyle(
+                fontSize: MediaQuery.of(context).size.width < 100 ? 16 : 16,
+              ),
+            );
           },
           maxWidth: MediaQuery.of(context).size.width.isFinite
               ? MediaQuery.of(context).size.width - 70
@@ -177,9 +173,6 @@ class _ChatState extends State<Chat> {
         ),
         inputOptions: InputOptions(
           inputToolbarPadding: EdgeInsets.fromLTRB(8, 8, 8, 10),
-          // trailing: [
-          //   IconButton(onPressed: _sendMediaMessage, icon: Icon(Icons.image))
-          // ],
           sendButtonBuilder: (onSend) {
             return IconButton(
               color: Theme.of(context).brightness == Brightness.dark
@@ -209,5 +202,33 @@ class _ChatState extends State<Chat> {
         typingUsers: typing,
       ),
     );
+  }
+
+  List<TextSpan> _parseText(String text) {
+    final boldPattern = RegExp(r'\*\*(.*?)\*\*');
+    final matches = boldPattern.allMatches(text);
+    if (matches.isEmpty) {
+      return [TextSpan(text: text)];
+    }
+
+    List<TextSpan> spans = [];
+    int lastMatchEnd = 0;
+
+    for (final match in matches) {
+      if (match.start > lastMatchEnd) {
+        spans.add(TextSpan(text: text.substring(lastMatchEnd, match.start)));
+      }
+      spans.add(TextSpan(
+        text: match.group(1),
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ));
+      lastMatchEnd = match.end;
+    }
+
+    if (lastMatchEnd < text.length) {
+      spans.add(TextSpan(text: text.substring(lastMatchEnd)));
+    }
+
+    return spans;
   }
 }
