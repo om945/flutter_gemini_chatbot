@@ -1,7 +1,7 @@
 # flutter_gemini_chatbot
 
 
-Uploading 2025-02-14 13-41-29.mp4…
+https://github.com/user-attachments/assets/4886b22c-645b-48ed-a785-7cfa9cd8047f
 
 
 ## Getting Started
