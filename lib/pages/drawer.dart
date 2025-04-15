@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gemini_chatbot/pages/aboutpage.dart';
-import 'package:flutter_gemini_chatbot/theme/theam.dart';
+import 'package:flutter_gemini_chatbot/theme/theme.dart';
 
 class MyDrawer extends StatelessWidget {
   // final String name;
