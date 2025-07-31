@@ -80,12 +80,12 @@ class _AboutPageState extends State<AboutPage> {
                     ),
                   ),
                   SizedBox(height: 25),
-                  Text(
-                    '• Developed by: Om Sunil Belekar',
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
+                  // Text(
+                  //   '• Developed by: Om Sunil Belekar',
+                  //   style: TextStyle(
+                  //     fontSize: 16,
+                  //   ),
+                  // ),
                   SizedBox(height: 16),
                   Text(
                     '• Contact us:',

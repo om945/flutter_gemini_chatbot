@@ -55,8 +55,8 @@ class _ChatState extends State<Chat> {
   //       });
   // }
   ChatUser user = ChatUser(id: '1', firstName: 'Me');
-  ChatUser bot =
-      ChatUser(id: '2', firstName: 'A U Z A', profileImage: 'assets/files/icon.png');
+  ChatUser bot = ChatUser(
+      id: '2', firstName: 'A U Z A', profileImage: 'assets/files/icon.png');
 
   List<ChatMessage> allMessages = [];
   List<ChatUser> typing = [];
@@ -90,7 +90,8 @@ class _ChatState extends State<Chat> {
         .then((value) {
       if (value.statusCode == 200) {
         var result = jsonDecode(value.body);
-        String responseText = result['candidates'][0]['content']['parts'][0]['text'];
+        String responseText =
+            result['candidates'][0]['content']['parts'][0]['text'];
         ChatMessage m1 = ChatMessage(
           text: responseText,
           user: bot,
@@ -114,10 +115,7 @@ class _ChatState extends State<Chat> {
       appBar: AppBar(
         centerTitle: true,
         forceMaterialTransparency: true,
-        title: Text('A U Z A',
-            style: TextStyle(
-          fontWeight: FontWeight.bold
-        )),
+        title: Text('A U Z A', style: TextStyle(fontWeight: FontWeight.bold)),
       ),
       body: DashChat(
         currentUser: user,
@@ -151,13 +149,13 @@ class _ChatState extends State<Chat> {
                 children: _parseText(message.text),
               ),
               style: TextStyle(
-                fontSize: MediaQuery.of(context).size.width < 100 ? 16 : 16,
+                fontSize: MediaQuery.of(context).size.width < 600 ? 14 : 16,
               ),
             );
           },
-          maxWidth: MediaQuery.of(context).size.width.isFinite
+          maxWidth: MediaQuery.of(context).size.width < 600
               ? MediaQuery.of(context).size.width - 70
-              : 300,
+              : 350,
           showTime: false,
           currentUserContainerColor:
               Theme.of(context).brightness == Brightness.dark
@@ -172,7 +170,11 @@ class _ChatState extends State<Chat> {
               : Colors.black,
         ),
         inputOptions: InputOptions(
-          inputToolbarPadding: EdgeInsets.fromLTRB(8, 8, 8, 10),
+          inputToolbarPadding: EdgeInsets.fromLTRB(
+              MediaQuery.of(context).size.width < 600 ? 8 : 50,
+              20,
+              MediaQuery.of(context).size.width < 600 ? 8 : 50,
+              20),
           sendButtonBuilder: (onSend) {
             return IconButton(
               color: Theme.of(context).brightness == Brightness.dark
