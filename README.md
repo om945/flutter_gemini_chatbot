@@ -1,10 +1,27 @@
 # flutter_gemini_chatbot
 
-A new Flutter project.
+
+https://github.com/user-attachments/assets/4886b22c-645b-48ed-a785-7cfa9cd8047f
+
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+"🚀 Project 4 : Flutter Practice -'A U Z A' AI Chatbot "
+
+📁 About 
+" A U Z A: 🤖 Your AI Assistance!
+
+This AI chatbot leverages advanced natural language processing to understand and respond to your queries in a human-like manner.  It's trained on a massive dataset, enabling it to handle a wide range of topics and tasks, from answering simple questions to providing complex information and assistance.  Enjoy seamless and efficient interactions anytime, anywhere."
+
+🗂️ Download App 
+https://lnkd.in/eAMdn2Tk
+
+I'll be building more projects and updating regularly.
+Feel free to share your thoughts, improvements or any suggestions in the comments 👇💬
+
+🧑‍💻
+"Stay tuned for more updates, & until then, 
+keep creating and innovating 💻 💫"
 
 A few resources to get you started if this is your first Flutter project:
 
